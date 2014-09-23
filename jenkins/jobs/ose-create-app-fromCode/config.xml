@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <actions/>
+  <description>Create an application from an existing git repo, using specified base cartridge using OpenShift Rest API.</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>100</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>10</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.openshift.OpenShiftApplicationUUIDJobProperty plugin="openshift@1.4">
+      <applicationUUID>5410ba565973ca331500062a</applicationUUID>
+    </hudson.plugins.openshift.OpenShiftApplicationUUIDJobProperty>
+    <hudson.plugins.openshift.OpenShiftBuilderSizeJobProperty plugin="openshift@1.4">
+      <builderSize>small</builderSize>
+    </hudson.plugins.openshift.OpenShiftBuilderSizeJobProperty>
+    <hudson.plugins.openshift.OpenShiftBuilderTimeoutJobProperty plugin="openshift@1.4">
+      <builderTimeout>300000</builderTimeout>
+    </hudson.plugins.openshift.OpenShiftBuilderTimeoutJobProperty>
+    <hudson.plugins.openshift.OpenShiftBuilderTypeJobProperty plugin="openshift@1.4">
+      <builderType>diy</builderType>
+    </hudson.plugins.openshift.OpenShiftBuilderTypeJobProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>GREG_TEST123</name>
+          <description/>
+          <defaultValue>Gregory</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.openshift.OpenShiftPlatformJobProperty plugin="openshift@1.4">
+      <platform>linux</platform>
+    </hudson.plugins.openshift.OpenShiftPlatformJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>ose-create-app-fromCode</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>$OPENSHIFT_REPO_DIR</customWorkspace>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+# Create new application from master branch in existing git project repo
+
+#curl -k -X POST https://openshift.redhat.com/broker/rest/domains/ghoelzer/applications --user "ghoelzer@redhat.com:Water!23" --data "name=04prd02eaphelloworldV100&amp;cartridge=jbosseap-6&amp;scale=true&amp;gear_profile=small&amp;initial_git_url=https://github.com/ghoelzer-rht/eaphelloworld-xpaas.git" -H "Accept: application/xml"
+
+echo my first name is $GREG_TEST123</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
